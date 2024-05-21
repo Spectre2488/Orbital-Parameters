@@ -1,0 +1,55 @@
+import math
+
+def calculate_sma_from_period(orbital_period_seconds):
+    # Constants
+    G = 6.67430e-11  # gravitational constant in m^3 kg^-1 s^-2
+    M = 5.972e24     # mass of the Earth in kg
+
+    # Calculate the semi-major axis using the formula
+    numerator = G * M * orbital_period_seconds**2
+    denominator = 4 * math.pi**2
+    sma = (numerator / denominator)**(1/3)
+
+    return sma
+
+def calculate_sma_from_altitude(altitude_km):
+    # Radius of Earth in meters
+    radius_earth_m = 6371000
+
+    # Convert altitude from kilometers to meters
+    altitude_m = altitude_km * 1000
+
+    # Calculate the semi-major axis
+    sma = radius_earth_m + altitude_m
+
+    return sma
+
+# Get user input
+choice = input("Enter 'P' to input orbital period or 'A' to input altitude: ").strip().upper()
+
+if choice == 'P':
+    period_unit = input("Enter 'H' for hours, 'M' for minutes, or 'S' for seconds: ").strip().upper()
+    if period_unit == 'H':
+        orbital_period_hours = float(input("Enter the orbital period of the satellite in hours: "))
+        orbital_period_seconds = orbital_period_hours * 3600
+    elif period_unit == 'M':
+        orbital_period_minutes = float(input("Enter the orbital period of the satellite in minutes: "))
+        orbital_period_seconds = orbital_period_minutes * 60
+    elif period_unit == 'S':
+        orbital_period_seconds = float(input("Enter the orbital period of the satellite in seconds: "))
+    else:
+        print("Invalid choice! Please enter 'H', 'M', or 'S'.")
+        exit()
+    sma_m = calculate_sma_from_period(orbital_period_seconds)
+elif choice == 'A':
+    altitude_km = float(input("Enter the altitude of the satellite above Earth's surface in kilometers: "))
+    sma_m = calculate_sma_from_altitude(altitude_km)
+else:
+    print("Invalid choice! Please enter 'P' for orbital period or 'A' for altitude.")
+    exit()
+
+# Convert the semi-major axis to kilometers
+sma_km = sma_m / 1000
+
+# Print the result
+print(f"The semi-major axis of the satellite is {sma_m:.2f} meters ({sma_km:.2f} kilometers).")
