@@ -1,0 +1,20 @@
+import math
+
+def calculate_eccentricity(semi_major_axis_km, semi_minor_axis_km):
+    # Convert semi-major and semi-minor axes from kilometers to meters
+    semi_major_axis_m = semi_major_axis_km * 1000
+    semi_minor_axis_m = semi_minor_axis_km * 1000
+    
+    # Calculate eccentricity using semi-major and semi-minor axes
+    eccentricity = math.sqrt(1 - (semi_minor_axis_m / semi_major_axis_m)**2)
+    return eccentricity
+
+# Get user input
+semi_major_axis_km = float(input("Enter the semi-major axis of the orbit (in kilometers): "))
+semi_minor_axis_km = float(input("Enter the semi-minor axis of the orbit (in kilometers): "))
+
+# Calculate eccentricity
+eccentricity = calculate_eccentricity(semi_major_axis_km, semi_minor_axis_km)
+
+# Print the result
+print(f"The eccentricity of the orbit is {eccentricity:.6f}")
