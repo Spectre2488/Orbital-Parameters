@@ -1,0 +1,17 @@
+def calculate_semi_minor_axis(semi_major_axis, eccentricity):
+    # Calculate the semi-minor axis using the formula
+    semi_minor_axis = semi_major_axis * (1 - eccentricity**2)**0.5
+    return semi_minor_axis
+
+# Get user input
+semi_major_axis_km = float(input("Enter the semi-major axis of the orbit (in kilometers): "))
+eccentricity = float(input("Enter the eccentricity of the orbit: "))
+
+# Calculate the semi-minor axis
+semi_minor_axis_km = calculate_semi_minor_axis(semi_major_axis_km, eccentricity)
+
+# Round the result to match the manually calculated precision
+rounded_semi_minor_axis_km = round(semi_minor_axis_km, 2)
+
+# Print the rounded result
+print(f"The semi-minor axis of the orbit is {rounded_semi_minor_axis_km:.2f} kilometers.")
